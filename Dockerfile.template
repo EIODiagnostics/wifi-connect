@@ -4,7 +4,7 @@ ENV INITSYSTEM on
 
 RUN apt-get update \
     && apt-get install -y dnsmasq wireless-tools network-manager \
-    && && systemctl mask NetworkManager.service 
+    && systemctl mask NetworkManager.service 
 
 #RUN apt-get clean \
 #    && rm -rf /var/lib/apt/lists/*
