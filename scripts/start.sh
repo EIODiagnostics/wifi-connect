@@ -20,7 +20,7 @@ if [ $? -eq 0 ]; then
     printf 'Skipping WiFi Connect\n'
 else
     printf 'Starting WiFi Connect\n'
-    ./wifi-connect --portal -ssid "EIO Camera"
+    ./wifi-connect --portal-ssid "EIO Camera"
 fi
 
 # Start your application here.
