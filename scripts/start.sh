@@ -23,4 +23,9 @@ else
     ./wifi-connect --portal-ssid "EIO Camera"
 fi
 
+
 # Start your application here.
+echo "Use control-c to quit this script"
+while true; do
+    sleep 60
+done
