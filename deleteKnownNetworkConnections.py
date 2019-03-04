@@ -4,18 +4,20 @@ Delete all known wifi connection credentials so we can test the wifi-connect int
 
 $ nmcli connection show
 NAME                UUID                                  TYPE             DEVICE
-WiFi Connect        0933fe0e-fbee-45f3-832a-9e601b7a8bcb  802-11-wireless  wlan0
-Wired connection 1  0c6d7629-1a1e-381d-adaf-81dd7a607efb  802-3-ethernet   eth0
-supervisor0         ae518599-1535-4837-a5ec-9b6df788e009  bridge           supervisor0
-
-$ nmcli connection add type 802-11-wireless ifname wlan0 ssid WeWork
+WeWork              7e91bf92-fdc2-4a93-b0f0-22d9bf4d878b  802-11-wireless  wlan0
+Wired connection 1  0c8b6195-2cb0-3b02-b362-a85992640c9e  802-3-ethernet   eth0
+supervisor0         92435b02-e285-4c1a-85b8-13ce6a96d529  bridge           supervisor0
+$ ./deleteKnownNetworkConnections.py
+Deleting {'id': 'WeWork', 'permissions': [], 
+'timestamp': 1551740291, 
+'type': '802-11-wireless', 
+'uuid': '7e91bf92-fdc2-4a93-b0f0-22d9bf4d878b'}
 
 $ nmcli connection show
-NAME                UUID                                  TYPE             DEVICE
-WiFi Connect        0933fe0e-fbee-45f3-832a-9e601b7a8bcb  802-11-wireless  wlan0
-Wired connection 1  0c6d7629-1a1e-381d-adaf-81dd7a607efb  802-3-ethernet   eth0
-supervisor0         ae518599-1535-4837-a5ec-9b6df788e009  bridge           supervisor0
-wifi-wlan0          2e8df048-2d1d-42a0-890f-26d394738098  802-11-wireless  --
+NAME                UUID                                  TYPE            DEVICE
+Wired connection 1  0c8b6195-2cb0-3b02-b362-a85992640c9e  802-3-ethernet  eth0
+supervisor0         92435b02-e285-4c1a-85b8-13ce6a96d529  bridge          supervisor0
+
 
 """
 
