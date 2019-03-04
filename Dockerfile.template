@@ -4,9 +4,11 @@ FROM balenalib/%%RESIN_MACHINE_NAME%%-debian-python:3.7.2-stretch-build
 ENV INITSYSTEM on
 
 RUN apt-get update \
-    && apt-get install -y dnsmasq wireless-tools network-manager \
-    && systemctl mask NetworkManager.service 
+    && apt-get install -y dnsmasq wireless-tools network-manager
+RUN systemctl mask NetworkManager.service 
 RUN pip3 install python-networkmanager
+
+# TODO: put this back when we are happy with the performance
 #RUN apt-get clean \
 #    && rm -rf /var/lib/apt/lists/*
 
@@ -18,6 +20,8 @@ RUN curl https://api.github.com/repos/balena-io/wifi-connect/releases/latest -s 
     | tar -xvz -C /usr/src/app/
 
 COPY scripts/start.sh .
+COPY ui ui
+COPY deleteKnownNetworkConnections.py .
 
 ENV DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 
