@@ -33,7 +33,7 @@ while true; do
         printf 'Skipping WiFi Connect\n'
     else
         printf 'Starting WiFi Connect\n'
-        ./wifi-connect --portal-ssid "EIO Camera ${RESIN_DEVICE_NAME_AT_INIT}"
+        ./wifi-connect --portal-ssid "EIO Camera ${RESIN_DEVICE_NAME_AT_INIT}" --activity-timeout 60
     fi
 
 
