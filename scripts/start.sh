@@ -6,9 +6,9 @@ export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 # setup logging of this script /data/command.log
 mkdir -p /data
 readonly LOG_LOCATION=/data/command.log
-if [ -f $LOG_LOCATION ]; then
+# if [ -f $LOG_LOCATION ]; then
 #   rm $LOG_LOCATION
-fi
+# fi
 exec >> (tee -i $LOG_LOCATION)
 exec 2>&1
 
