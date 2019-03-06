@@ -2,6 +2,17 @@
 
 export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 
+
+# setup logging of this script /data/command.log
+mkdir -p /data
+readonly LOG_LOCATION=/data/command.log
+if [ -f $LOG_LOCATION ]; then
+   rm $LOG_LOCATION
+fi
+exec > >(tee -i $LOG_LOCATION)
+exec 2>&1
+
+
 # Choose a condition for running WiFi Connect according to your use case:
 
 # 1. Is there a default gateway?
