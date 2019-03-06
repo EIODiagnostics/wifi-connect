@@ -7,9 +7,9 @@ export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 mkdir -p /data
 readonly LOG_LOCATION=/data/command.log
 if [ -f $LOG_LOCATION ]; then
-   rm $LOG_LOCATION
+#   rm $LOG_LOCATION
 fi
-exec > >(tee -i $LOG_LOCATION)
+exec >> (tee -i $LOG_LOCATION)
 exec 2>&1
 
 
@@ -26,8 +26,17 @@ exec 2>&1
 
 # check for active WiFi Connection regularly 
 while true; do
+    echo `date` "1. Is there a default gateway?"
+    ip route | grep default
+
+    echo `date` " 2. Is there Internet connectivity?"
+    nmcli -t g | grep full
+
+    echo `date` " 3. Is there Internet connectivity via a google ping?"
+    wget --spider http://google.com 2>&1
+
     # 4. Is there an active WiFi connection?
-    iwgetid -r
+    #iwgetid -r
 
     if [ $? -eq 0 ]; then
         printf 'Skipping WiFi Connect\n'
