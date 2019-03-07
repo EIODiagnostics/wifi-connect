@@ -26,14 +26,14 @@ exec 2>&1
 
 # check for active WiFi Connection regularly 
 while true; do
-    echo `date` "1. Is there a default gateway?"
-    ip route | grep default
+    # echo `date` "1. Is there a default gateway?"
+    # ip route | grep default
 
     echo `date` " 2. Is there Internet connectivity?"
     nmcli -t g | grep full
 
-    echo `date` " 3. Is there Internet connectivity via a google ping?"
-    wget --spider http://google.com 2>&1
+    # echo `date` " 3. Is there Internet connectivity via a google ping?"
+    # wget --spider http://google.com 2>&1
 
     # 4. Is there an active WiFi connection?
     #iwgetid -r
@@ -42,6 +42,7 @@ while true; do
         printf 'Skipping WiFi Connect\n'
     else
         printf 'Starting WiFi Connect\n'
+        # Start wifi-connect  and make it exit if no interaction happens within 10 minutes.
         ./wifi-connect --portal-ssid "EIO Camera ${RESIN_DEVICE_NAME_AT_INIT}" --activity-timeout 60
     fi
 
@@ -49,5 +50,6 @@ while true; do
     # Start your application here. In the background. 
     echo "Use control-c to quit this script"
 
+    # wait 10 seconds before checking again for internet connectivity
     sleep 10
 done
