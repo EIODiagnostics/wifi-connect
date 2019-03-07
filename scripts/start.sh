@@ -9,7 +9,7 @@ readonly LOG_LOCATION=/data/command.log
 # if [ -f $LOG_LOCATION ]; then
 #   rm $LOG_LOCATION
 # fi
-exec >> (tee -i $LOG_LOCATION)
+exec > >(tee -i $LOG_LOCATION)
 exec 2>&1
 
 
