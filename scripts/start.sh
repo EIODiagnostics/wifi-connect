@@ -29,8 +29,7 @@ while true; do
     # echo `date` "1. Is there a default gateway?"
     # ip route | grep default
 
-    # echo `date` " 2. Is there Internet connectivity?"
-    # nmcli -t g | grep full
+
 
     echo `date` " 3. Is there Internet connectivity via a google ping?"
     wget --spider http://google.com 2>&1
