@@ -9,9 +9,10 @@ readonly LOG_LOCATION=/data/command.log
 # if [ -f $LOG_LOCATION ]; then
 #   rm $LOG_LOCATION
 # fi
-exec > >(tee -i $LOG_LOCATION)
-exec 2>&1
+exec &> >(tee -a -i $LOG_LOCATION)
+# exec 2>&1
 
+echo `date` " Script started"
 
 # Choose a condition for running WiFi Connect according to your use case:
 
@@ -29,7 +30,8 @@ while true; do
     # echo `date` "1. Is there a default gateway?"
     # ip route | grep default
 
-
+    # 2. Is there Internet connectivity?
+    # nmcli -t g | grep full
 
     echo `date` " 3. Is there Internet connectivity via a google ping?"
     wget --spider http://google.com 2>&1
@@ -41,10 +43,9 @@ while true; do
         printf 'Skipping WiFi Connect\n'
     else
         printf 'Starting WiFi Connect\n'
-        # Start wifi-connect  and make it exit if no interaction happens within 10 minutes.
+        # Start wifi-connect  and make it exit if no interaction happens within 1 minute.
         ./wifi-connect --portal-ssid "EIO Camera ${RESIN_DEVICE_NAME_AT_INIT}" --activity-timeout 60
     fi
-
 
     # Start your application here. In the background. 
     echo "Use control-c to quit this script"
