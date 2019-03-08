@@ -12,8 +12,7 @@ $(function(){
 
 	$('#ssid-select').change(showHideEnterpriseSettings);
 
-	var network = (
-	$.get("/networks", function(data){
+	setInterval($.get("/networks", function(data){
 		if(data.length === 0){
 			$('.before-submit').hide();
 			$('#no-networks-message').removeClass('hidden');
@@ -30,9 +29,7 @@ $(function(){
 
 			jQuery.proxy(showHideEnterpriseSettings, $('#ssid-select'))();
 		}
-	}););
-
-	setInterval(network, 30);
+	}), 10000);
 
 	$('#connect-form').submit(function(ev){
 		$.post('/connect', $('#connect-form').serialize(), function(data){
