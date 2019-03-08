@@ -14,16 +14,6 @@ exec &> >(tee -a -i $LOG_LOCATION)
 
 echo `date` " Script started"
 
-# Choose a condition for running WiFi Connect according to your use case:
-
-# 1. Is there a default gateway?
-# ip route | grep default
-
-# 2. Is there Internet connectivity?
-# nmcli -t g | grep full
-
-# 3. Is there Internet connectivity via a google ping?
-# wget --spider http://google.com 2>&1
 
 # check for active WiFi Connection regularly 
 while true; do
@@ -43,7 +33,6 @@ while true; do
     #     echo "Offline"
     # fi
 
-    echo "Line 46."
     wget "http://clients3.google.com/generate_204?" -O /dev/null 2>&1 | grep "204 No Content" > /dev/null
     # if [ $? -eq 0 ]; then
     #     echo "Online"
