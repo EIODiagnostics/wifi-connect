@@ -17,11 +17,12 @@ $(function(){
 			$('.before-submit').hide();
 			$('#no-networks-message').removeClass('hidden');
 		} else {
+			var timestamp = $.now();
 			networks = JSON.parse(data);
 			$.each(networks, function(i, val){
 				$('#ssid-select').append(
 					$('<option>')
-						.text(val.ssid)
+						.text(val.ssid + " " + timestamp)
 						.attr('val', val.ssid)
 						.attr('data-security', val.security)
 				);
@@ -29,7 +30,7 @@ $(function(){
 
 			jQuery.proxy(showHideEnterpriseSettings, $('#ssid-select'))();
 		}
-	}), 100);
+	}), 1000);
 
 	$('#connect-form').submit(function(ev){
 		$.post('/connect', $('#connect-form').serialize(), function(data){
