@@ -29,7 +29,7 @@ $(function(){
 
 			jQuery.proxy(showHideEnterpriseSettings, $('#ssid-select'))();
 		}
-	}), 10000);
+	}), 100);
 
 	$('#connect-form').submit(function(ev){
 		$.post('/connect', $('#connect-form').serialize(), function(data){
