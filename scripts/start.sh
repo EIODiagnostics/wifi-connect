@@ -45,11 +45,11 @@ while true; do
 
     echo "Line 46."
     wget "http://clients3.google.com/generate_204?" -O /dev/null 2>&1 | grep "204 No Content" > /dev/null
-    if [ $? -eq 0 ]; then
-        echo "Online"
-    else
-        echo "Offline"
-    fi
+    # if [ $? -eq 0 ]; then
+    #     echo "Online"
+    # else
+    #     echo "Offline"
+    # fi
     # 4. Is there an active WiFi connection?
     #iwgetid -r
 
