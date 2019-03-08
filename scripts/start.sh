@@ -53,7 +53,7 @@ while true; do
     # 4. Is there an active WiFi connection?
     #iwgetid -r
 
-    if [ $? -= 0 ]; then
+    if [ $? != 0 ]; then
         printf 'Skipping WiFi Connect\n'
     else
         printf 'Starting WiFi Connect\n'
