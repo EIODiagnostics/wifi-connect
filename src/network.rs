@@ -110,9 +110,8 @@ impl NetworkCommandHandler {
     }
 
     fn spawn_activity_timeout(config: &Config, network_tx: Sender<NetworkCommand>) {
-        // let activity_timeout = config.activity_timeout;
-            let activity_timeout = 60;
-            
+        let activity_timeout = config.activity_timeout;
+
         if activity_timeout == 0 {
             return;
         }
