@@ -17,30 +17,13 @@ echo `date` " Script started"
 
 # check for active WiFi Connection regularly 
 while true; do
-    # echo `date` "1. Is there a default gateway?"
-    # ip route | grep default
 
-    # 2. Is there Internet connectivity?
-    # nmcli -t g | grep full
-
-    echo `date` " 3. Is there Internet connectivity via a google ping?"
-    # wget --spider http://google.com 2>&1
-
-    # echo -e "GET http://google.com HTTP/1.0\n\n" | nc google.com 80 > /dev/null 2>&1
-    # if [ $? -eq 0 ]; then
-    #     echo "Online"
-    # else
-    #     echo "Offline"
-    # fi
-
-    wget "http://clients3.google.com/generate_204?" -O /dev/null 2>&1 | grep "204 No Content" > /dev/null
-    # if [ $? -eq 0 ]; then
-    #     echo "Online"
-    # else
-    #     echo "Offline"
-    # fi
+    # echo `date` " 3. Is there Internet connectivity via a google ping?"
+    
+    # wget "http://clients3.google.com/generate_204?" -O /dev/null 2>&1 | grep "204 No Content" > /dev/null
+  
     # 4. Is there an active WiFi connection?
-    #iwgetid -r
+    iwgetid -r
 
     if [ $? -eq 0 ]; then
         printf 'Skipping WiFi Connect\n'
