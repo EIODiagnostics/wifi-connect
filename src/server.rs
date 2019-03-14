@@ -146,7 +146,7 @@ pub fn start_server(
 
     let mut router = Router::new();
     router.get("/", Static::new(ui_directory), "index");
-    router.get("/index2", Static::ui_directory, "index2");
+    router.get("/index2", ui_directory, "index2");
     router.get("/networks", networks, "networks");
     router.post("/connect", connect, "connect");
 
