@@ -144,9 +144,15 @@ pub fn start_server(
         Ok(Response::with((status::Ok, "OK")))
     }
 
+    fn query_handler(req: &mut Request) -> IronResult<Response> {
+        let ref query = req.extensions.get::<Router>()
+            .unwrap().find("query").unwrap_or("/");
+        Ok(Response::with((status::Ok, *query)))
+    }
+
     let mut router = Router::new();
     router.get("/", Static::new(ui_directory), "index");
-    router.get("/index2", handler, "index2");
+    router.get("/:query", query_handler, "query_handler");
     router.get("/networks", networks, "networks");
     router.post("/connect", connect, "connect");
 
