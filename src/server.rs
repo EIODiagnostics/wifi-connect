@@ -140,9 +140,13 @@ pub fn start_server(
         exit_tx: exit_tx,
     };
 
+    fn handler(_: &mut Request) -> IronResult<Response> {
+        Ok(Response::with((status::Ok, "OK")))
+    }
+
     let mut router = Router::new();
     router.get("/", Static::new(ui_directory), "index");
-    router.get("/index2", Static::new(&ui_directory), "index2");
+    router.get("/index2", handler, "index2");
     router.get("/networks", networks, "networks");
     router.post("/connect", connect, "connect");
 
