@@ -146,12 +146,13 @@ pub fn start_server(
 
     let mut router = Router::new();
     router.get("/", Static::new(ui_directory), "index");
-    router.get("/index2", ui_directory, "index2");
+    router.get("/index2", Static::new(&ui_directory), "index2");
     router.get("/networks", networks, "networks");
     router.post("/connect", connect, "connect");
 
     let mut assets = Mount::new();
     assets.mount("/", router);
+    assets.mount("/index2", router);
     assets.mount("/css", Static::new(&ui_directory.join("css")));
     assets.mount("/img", Static::new(&ui_directory.join("img")));
     assets.mount("/js", Static::new(&ui_directory.join("js")));
