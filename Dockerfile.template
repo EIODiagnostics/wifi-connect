@@ -14,14 +14,18 @@ RUN pip3 install python-networkmanager
 
 WORKDIR /usr/src/app
 
-RUN curl https://api.github.com/repos/balena-io/wifi-connect/releases/latest -s \
-    | grep -hoP 'browser_download_url": "\K.*%%RESIN_ARCH%%\.tar\.gz' \
-    | xargs -n1 curl -Ls \
-    | tar -xvz -C /usr/src/app/
+#RUN curl https://api.github.com/repos/balena-io/wifi-connect/releases/latest -s \
+#    | grep -hoP 'browser_download_url": "\K.*%%RESIN_ARCH%%\.tar\.gz' \
+#    | xargs -n1 curl -Ls \
+#    | tar -xvz -C /usr/src/app/
 
+RUN curl https://sh.rustup.rs -sSf | sh
+COPY . ./
 COPY scripts/start.sh .
 COPY ui ui
 COPY deleteKnownNetworkConnections.py .
+
+RUN cargo build
 
 ENV DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 

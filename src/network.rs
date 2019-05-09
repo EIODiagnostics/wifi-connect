@@ -1,3 +1,7 @@
+#[macro_use]
+extern crate log;
+
+
 use std::thread;
 use std::process;
 use std::time::Duration;
@@ -116,8 +120,11 @@ impl NetworkCommandHandler {
             return;
         }
 
+        debug!("spawing thread with timeout of {} seconds", activity_timeout);
         thread::spawn(move || {
+            debug!("sleeping {} seconds", activity_timeout);
             thread::sleep(Duration::from_secs(activity_timeout));
+            debug!("awake after {} seconds", activity_timeout);
 
             if let Err(err) = network_tx.send(NetworkCommand::Timeout) {
                 error!(
@@ -139,6 +146,8 @@ impl NetworkCommandHandler {
 
             if let Err(err) = network_tx.send(NetworkCommand::Exit) {
                 error!("Sending NetworkCommand::Exit failed: {}", err.description());
+            } else {
+                debug!("Sending NetworkCommand::Exit succeeded");
             }
         });
     }
